@@ -1,6 +1,7 @@
 import express from "express";
-import Produto from "./models/Produto.js";
+import Produto from "./models/produto.model.js";
 import dbProdutos from "./db/db.js";
+import produtosRoutes from "./routes/produto.routes.js";
 import cors from "cors";
 
 const app = express();
@@ -13,42 +14,44 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.use("", produtosRoutes);
+
 // Criar um novo produto
-app.post("/produto", (req, res) => {
-  const {
-    nome,
-    tipoMaterial,
-    formato,
-    espessura,
-    largura,
-    altura,
-    comprimento,
-    peso,
-    quantidade,
-    localizacao,
-  } = req.body;
+// app.post("/produto", (req, res) => {
+//   const {
+//     nome,
+//     tipoMaterial,
+//     formato,
+//     espessura,
+//     largura,
+//     altura,
+//     comprimento,
+//     peso,
+//     quantidade,
+//     localizacao,
+//   } = req.body;
 
-  let produto = new Produto(
-    nome,
-    tipoMaterial,
-    formato,
-    espessura,
-    largura,
-    altura,
-    comprimento,
-    peso,
-    quantidade,
-    localizacao
-  );
+//   let produto = new Produto(
+//     nome,
+//     tipoMaterial,
+//     formato,
+//     espessura,
+//     largura,
+//     altura,
+//     comprimento,
+//     peso,
+//     quantidade,
+//     localizacao
+//   );
 
-  dbProdutos.push(produto);
-  res.status(201).json({ message: "Produto criado", produto });
-});
+//   dbProdutos.push(produto);
+//   res.status(201).json({ message: "Produto criado", produto });
+// });
 
-// Listar todos os produtos
-app.get("/produtos", (req, res) => {
-  res.json(dbProdutos);
-});
+// // Listar todos os produtos
+// app.get("/produtos", (req, res) => {
+//   res.json(dbProdutos);
+// });
 
 // Deleta produto
 app.delete("/produto/:id", (req, res) => {
