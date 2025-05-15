@@ -12,10 +12,10 @@ form.addEventListener("submit", async (e) => {
   dados.peso = parseFloat(dados.peso);
   dados.quantidade = parseInt(dados.quantidade);
 
-  const res = await fetch("/produto", {
+  const res = await fetch("http://localhost:3333/produto", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(dados)
+    body: JSON.stringify(dados),
   });
 
   if (res.ok) {
@@ -26,11 +26,11 @@ form.addEventListener("submit", async (e) => {
 });
 
 async function carregarProdutos() {
-  const res = await fetch("/produtos");
+  const res = await fetch("http://localhost:3333/produtos");
   const produtos = await res.json();
 
   lista.innerHTML = "";
-  produtos.forEach(p => {
+  produtos.forEach((p) => {
     const li = document.createElement("li");
     li.textContent = `${p.nome} (${p.tipoMaterial}) - ${p.quantidade} unid.`;
     lista.appendChild(li);

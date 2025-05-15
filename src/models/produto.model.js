@@ -1,7 +1,18 @@
 let produtoId = 1;
 
 class Produto {
-  constructor(nome, tipoMaterial, formato, espessura, largura, altura, comprimento, peso, quantidade, localizacao) {
+  constructor(
+    nome,
+    tipoMaterial,
+    formato,
+    espessura,
+    largura,
+    altura,
+    comprimento,
+    peso,
+    quantidade,
+    localizacao
+  ) {
     this.id = produtoId++;
     this.nome = nome;
     this.tipoMaterial = tipoMaterial;
