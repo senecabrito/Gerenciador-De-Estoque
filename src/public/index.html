@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Estoque de Ferro e Alumínio</title>
+</head>
+<body>
+  <h1>Cadastro de Produto</h1>
+  <form id="formProduto">
+    <input name="nome" placeholder="Nome" required />
+    <input name="tipoMaterial" placeholder="Tipo de Material" required />
+    <input name="formato" placeholder="Formato" required />
+    <input name="espessura" placeholder="Espessura" type="number" required />
+    <input name="largura" placeholder="Largura" type="number" required />
+    <input name="altura" placeholder="Altura" type="number" required />
+    <input name="comprimento" placeholder="Comprimento" type="number" required />
+    <input name="peso" placeholder="Peso" type="number" required />
+    <input name="quantidade" placeholder="Quantidade" type="number" required />
+    <input name="localizacao" placeholder="Localização" required />
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <h2>Produtos Cadastrados</h2>
+  <ul id="listaProdutos"></ul>
+
+  <script src="script.js"></script>
+</body>
+</html>

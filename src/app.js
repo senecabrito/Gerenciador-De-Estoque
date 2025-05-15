@@ -5,20 +5,78 @@ import dbProdutos from "./db/db.js";
 const app = express();
 app.use(express.json());
 
+// Criar um novo produto
 app.post("/produto", (req, res) => {
-    const {nome, preco} = req.body;
-    let produto = new Produto(nome, preco);
+    const {
+        nome,
+        tipoMaterial,
+        formato,
+        espessura,
+        largura,
+        altura,
+        comprimento,
+        peso,
+        quantidade,
+        localizacao
+    } = req.body;
+
+    let produto = new Produto(
+        nome,
+        tipoMaterial,
+        formato,
+        espessura,
+        largura,
+        altura,
+        comprimento,
+        peso,
+        quantidade,
+        localizacao
+    );
+
     dbProdutos.push(produto);
-    res.status(201).json({message: "Produto criado", produto});
+    res.status(201).json({ message: "Produto criado", produto });
 });
 
+// Listar todos os produtos
 app.get("/produtos", (req, res) => {
-    const listaProdutos = dbProdutos.map(produto => ({
-        id: produto.id,
-        nome: produto.nome,
-        preco: produto.preco
-    }))
-    res.json(listaProdutos);
+    res.json(dbProdutos);
 });
+
+app.delete("/produto/:id", (req, res) => {
+    const id = req.params.id;
+    const produto = dbProdutos.findIndex(p => p.id === id);
+    dbProdutos.splice(produto, 1);
+    res.status(200).json({message: "Produto deletado", produto});
+})
+
+app.patch("/produto/:id", (req, res) => {
+    const id = req.params.id;
+    const produto = dbProdutos.findIndex(p => p.id === id);
+    const {
+        nome,
+        tipoMaterial,
+        formato,
+        espessura,
+        largura,
+        altura,
+        comprimento,
+        peso,
+        quantidade,
+        localizacao
+    } = req.body;
+  
+    if (nome !== undefined) produto.nome = nome;
+    if (tipoMaterial !== undefined) produto.tipoMaterial = tipoMaterial;
+    if (formato !== undefined) produto.formato = formato;
+    if (espessura !== undefined) produto.espessura = espessura;
+    if (largura !== undefined) produto.largura = largura;
+    if (altura !== undefined) produto.altura = altura;
+    if (comprimento !== undefined) produto.comprimento = comprimento;
+    if (peso !== undefined) produto.peso = peso;
+    if (quantidade !== undefined) produto.quantidade = quantidade;
+    if (localizacao !== undefined) produto.localizacao = localizacao;
+
+    res.status(200).json({message: "Produto atualizado", produto});
+})
 
 export default app;
